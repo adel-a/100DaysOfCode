@@ -2,7 +2,7 @@
 #include<string.h>
 
 int factorial(int n);
-
+int printC(char arr[]);
 int main(int argc, char *argv[])
 {
     int sLength=strlen(argv[1]);
@@ -19,7 +19,8 @@ int main(int argc, char *argv[])
     {
         secLast=buff[sLength-1];
         first=buff[0];
-        
+        printC(buff);
+        printf("%s\n",buff);
     }
     
 }
@@ -32,4 +33,11 @@ int factorial(int n)
         result = result * i;
     }
     return result;
+}
+
+int printC(char *arr)
+{
+    
+    arr[0]='Z';
+ 
 }
