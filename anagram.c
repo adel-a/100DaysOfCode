@@ -2,26 +2,32 @@
 #include<string.h>
 
 int factorial(int n);
-int printC(char arr[]);
+int  flipSecLast(char *c,int l, int v);
+int strrev(char *s,int l);
+int iter(char *s,int l,int v, int *it);
+
 int main(int argc, char *argv[])
 {
     int sLength=strlen(argv[1]);
     int iterations;
-    int i;
-    char buff[sLength+1];
-    char buff2[sLength+1];
-    char buff3[sLength+1];
+ 
     char secLast;
     char first;
-    strcpy(buff,argv[1]);
+    int variations;
+    int it=0;
+    char buff[sLength];
     iterations = factorial(sLength);
-    for (i=0;i<iterations;i++)
+    strcpy(buff,argv[1]);
+    variations=iterations/sLength;
+    for(it=0;it<iterations;it++)
     {
-        secLast=buff[sLength-1];
-        first=buff[0];
-        printC(buff);
-        printf("%s\n",buff);
+        iter(buff,sLength,variations,&it);
+
     }
+    printf("%i\n",it);
+    
+    //flipSecLast(argv[1],sLength,variations);
+
     
 }
 
@@ -34,10 +40,46 @@ int factorial(int n)
     }
     return result;
 }
+int strrev(char *s, int l){
+    char buff[l+1];
+    l--;
+    for(int i=0;i<=l+1;i++)
+    {
+        buff[i]=s[l-i];
+    }
+    buff[l+1]='\0';
+    strcpy(s,buff);
+}
 
-int printC(char *arr)
+int flipSecLast(char *s,int l,int v)
 {
-    
-    arr[0]='Z';
- 
+    char buff[l+1];
+    buff[0]=s[l-2];
+    int count=0;
+    for(int i=0;i<l+1;i++)
+    {
+        if(i!=l-2)
+        {
+            buff[count+1]=s[i];
+            count++;
+        }
+    }
+    strcpy(s,buff);
+}
+
+ int iter(char *s,int l,int v,int *it)
+{
+    char buff[l];
+    strcpy(buff,s);
+    for(int i=1;i<v;i++)
+    {
+        strrev(buff,l);
+        printf("%s\n",buff);
+        flipSecLast(buff,l,v);
+        printf("%s\n",buff);
+        (*it)+=1;
+        i++;
+    }
+    printf("=============================\n");
+    strcpy(s,buff);
 }
